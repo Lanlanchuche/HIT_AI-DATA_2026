@@ -12,7 +12,7 @@ print("Shape:", iris.data.shape)
 
 #Bai 4a
 X_iris =  iris["data"][["petal width (cm)"]].values
-y_iris = (iris.target== 2).astype(int) #astype(int) de chuyen ve 0 va 1
+y_iris = (iris["target"]== 2).astype(int) #astype(int) de chuyen ve 0 va 1
 
 log_reg = LogisticRegression(random_state=42)
 log_reg.fit(X_iris, y_iris)
@@ -30,3 +30,19 @@ plt.ylabel("Probability")
 plt.legend()
 plt.grid()
 plt.show()
+
+#Bai 4c
+X_test = np.array([[1.7], [2.0]])
+predict = log_reg.predict(X_test)
+proba = log_reg.predict_proba(X_test)
+
+for i in range(len(X_test)):
+    width = X_test[i][0]
+    cls = "Iris-Virginica" if predict[i] == 1 else "Not Virginica"
+    prob = proba[i][1] * 100
+
+print("Pental width: ", width)
+print("Xac saut la Virginica: ", prob)
+
+
+
